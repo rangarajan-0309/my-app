@@ -1,6 +1,17 @@
 import create from "zustand";
 
-const useLoginStore = create((set) => ({
+interface LoginState {
+  username: string;
+  password: string;
+  isLoggedIn: boolean;
+}
+
+interface LoginStore extends LoginState {
+  login: (username: string, password: string) => Promise<void>;
+  logout: () => void;
+}
+
+const useLoginStore = create<LoginStore>((set) => ({
   username: "",
   password: "",
   isLoggedIn: false,
